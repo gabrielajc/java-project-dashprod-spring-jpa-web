@@ -2,11 +2,12 @@ package com.br.dashProd.service;
 
 import com.br.dashProd.model.LinhaEntity;
 import com.br.dashProd.model.LinhaRequestDTO;
+import com.br.dashProd.model.LinhaResponseDTO;
 import com.br.dashProd.respository.LinhaRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LinhaService {
@@ -14,16 +15,21 @@ public class LinhaService {
 
     public LinhaService(LinhaRepository linhaRepository) {
         this.linhaRepository = linhaRepository;
-
     }
 
-    public List<LinhaEntity> listLinhas() {
-        return linhaRepository.findAll();
-
+    public List<LinhaResponseDTO> listLinhas() {
+        return linhaRepository.findAll().stream()
+                .map(LinhaResponseDTO::fromEntity)
+                .collect(Collectors.toList());
     }
-
 
     public LinhaEntity saveLinhas(LinhaRequestDTO linhaRequestDTO) {
-        return linhaRepository.save();
+        LinhaEntity newLine = new LinhaEntity(
+                linhaRequestDTO.conteudo(),
+                linhaRequestDTO.materia(),
+                linhaRequestDTO.pomodoros(),
+                linhaRequestDTO.date()
+        );
+        return linhaRepository.save(newLine);
     }
 }

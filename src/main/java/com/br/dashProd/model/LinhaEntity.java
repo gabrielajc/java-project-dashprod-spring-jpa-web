@@ -29,4 +29,11 @@ public class LinhaEntity {
     @Column(nullable = false)
     LocalDate date;
 
+
+    public LinhaEntity(String conteudo, String materia, int pomodoros, LocalDate date) {
+        this.conteudo = conteudo;
+        this.materia = materia;
+        this.pomodoros = pomodoros;
+        this.date = date;
+    }
 }
