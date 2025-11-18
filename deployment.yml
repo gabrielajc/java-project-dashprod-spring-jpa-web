@@ -1,0 +1,19 @@
+metadata:
+  name: dashprod-api
+  labels:
+    app: dashprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashprod
+  template:
+    metadata:
+      labels:
+        app: dashprod
+    spec:
+      containers:
+        - name: dashprod-api
+          image: dashprod-api:v1
+          ports:
+            - containerPort: 8080

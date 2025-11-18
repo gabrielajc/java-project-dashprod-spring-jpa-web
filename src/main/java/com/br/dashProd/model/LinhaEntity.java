@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,8 +21,9 @@ public class LinhaEntity {
     @Column(nullable = false, length = 100)
     String conteudo;
 
-    @Column(nullable = false, length = 150)
-    String materia;
+    @ManyToMany
+    @JoinColumn(name = "materia_id", nullable = false)
+    Set<MateriaEntity> materia;
 
     @Column(nullable = false)
     int pomodoros;
@@ -29,8 +31,12 @@ public class LinhaEntity {
     @Column(nullable = false)
     LocalDate date;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    UserEntity user;
 
-    public LinhaEntity(String conteudo, String materia, int pomodoros, LocalDate date) {
+
+    public LinhaEntity(String conteudo, Set<MateriaEntity> materia, int pomodoros, LocalDate date) {
         this.conteudo = conteudo;
         this.materia = materia;
         this.pomodoros = pomodoros;
