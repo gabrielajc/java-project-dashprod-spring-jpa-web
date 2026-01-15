@@ -4,6 +4,8 @@ import com.br.dashProd.model.LinhaEntity;
 import com.br.dashProd.model.LinhaRequestDTO;
 import com.br.dashProd.model.LinhaResponseDTO;
 import com.br.dashProd.service.LinhaService;
+import com.nimbusds.jose.shaded.gson.Gson;
+import com.nimbusds.jose.shaded.gson.JsonObject;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -34,7 +37,7 @@ public class LinhaController {
         return ResponseEntity.status(HttpStatus.OK).body(linhaResponseDTO);
     }
 
-    @Transactional
+    @Transactional // proxy que envolve o objeto em uma verificação de sucesso antes do commit ou rollback
     @PostMapping("/linhas")
     public ResponseEntity salvarLinha(@RequestBody @Valid LinhaRequestDTO linhaRequestDTO){
         LinhaEntity response = linhaService.saveLinhas(linhaRequestDTO);

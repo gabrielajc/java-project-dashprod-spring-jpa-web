@@ -9,5 +9,6 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record LinhaRequestDTO(@NotNull String conteudo, @NotNull Set<MateriaEntity> materia, @NotNull @Min(1L) @Max(20L) int pomodoros, @NotNull LocalDate date) {
+public record LinhaRequestDTO(@NotNull String conteudo, @NotNull int materiaId, @NotNull @Min(1L) @Max(20L) int pomodoros, @NotNull LocalDate date) {
+
 }

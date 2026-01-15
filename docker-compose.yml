@@ -1,7 +1,31 @@
 services:
+#  cada item na estrutura imediatamente abaixo com 1 espaço de identiação vira um container
   api:
     build: .
     env_file:
+#      - '-' define uma estrutura de lista ou array para a variavel
       - ./.env
     ports:
       - 8080:8080
+#      TCP
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+#       enviromnmets sao injetadas na memoria da maquina virtual e lidas pelo host da imagem
+    ports:
+      - 2181:2181
+#      - port fowarind: encaminhamento de porta da placa de rede da maquina local para o rede virtual.
+  kafka:
+    depends_on:
+      - zookeeper
+    image: confluentinc/cp-kafka:latest
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092, PLAINTEXT_HOST://localhost:9092
+#      URI com o enum PLAINTEXT(texto puro) palavra reservada do kafka para dizer ao cliente deve se comuinicar sem criptografias em cima do TCP
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+        - 9092:9092
+
