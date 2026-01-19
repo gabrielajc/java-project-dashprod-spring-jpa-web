@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -29,14 +29,14 @@ public class LinhaEntity {
     int pomodoros;
 
     @Column(nullable = false)
-    LocalDate date;
+    LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     UserEntity user;
 
 
-    public LinhaEntity(String conteudo, Set<MateriaEntity> materia, int pomodoros, LocalDate date) {
+    public LinhaEntity(String conteudo, Set<MateriaEntity> materia, int pomodoros, LocalDateTime date) {
         this.conteudo = conteudo;
         this.materia = materia;
         this.pomodoros = pomodoros;

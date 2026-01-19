@@ -1,4 +1,4 @@
-package com.br.dashProd.model;
+package com.br.dashProd.dtos;
 
 import java.util.Map;
 import java.util.UUID;

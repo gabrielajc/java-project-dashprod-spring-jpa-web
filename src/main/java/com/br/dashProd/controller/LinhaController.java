@@ -2,10 +2,8 @@ package com.br.dashProd.controller;
 
 import com.br.dashProd.model.LinhaEntity;
 import com.br.dashProd.model.LinhaRequestDTO;
-import com.br.dashProd.model.LinhaResponseDTO;
+import com.br.dashProd.dtos.LinhaResponseDTO;
 import com.br.dashProd.service.LinhaService;
-import com.nimbusds.jose.shaded.gson.Gson;
-import com.nimbusds.jose.shaded.gson.JsonObject;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController
